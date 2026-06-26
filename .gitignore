@@ -1,0 +1,23 @@
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+
+# Node
+frontend/node_modules/
+
+# Environment
+.env
+
+# Database
+chroma_db/
+
+# Cloned repositories
+repositories/
+
+# Build
+dist/
+build/
+
+# IDE
+.vscode/
