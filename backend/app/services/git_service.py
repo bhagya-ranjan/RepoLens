@@ -1,36 +1,35 @@
 import os
 import shutil
+import stat
 
 from git import Repo
 
 
-# Folder where all cloned repositories will be stored
 REPOSITORIES_PATH = "storage/repositories"
+
+
+def remove_readonly(func, path, exc_info):
+    """
+    Handle read-only files on Windows when deleting repositories.
+    """
+    os.chmod(path, stat.S_IWRITE)
+    func(path)
 
 
 def clone_repository(github_url: str):
     """
     Clone a GitHub repository.
-
-    Parameters:
-        github_url (str): GitHub repository URL
-
-    Returns:
-        dict: Information about the cloned repository
     """
 
-    # Create storage folder if it doesn't exist
     os.makedirs(REPOSITORIES_PATH, exist_ok=True)
 
-    # Extract repository name from URL
     repo_name = github_url.rstrip("/").split("/")[-1]
 
-    # Destination folder
     destination = os.path.join(REPOSITORIES_PATH, repo_name)
 
-    # If already cloned, delete it
+    # Delete existing repository safely
     if os.path.exists(destination):
-        shutil.rmtree(destination)
+        shutil.rmtree(destination, onerror=remove_readonly)
 
     # Clone repository
     Repo.clone_from(github_url, destination)

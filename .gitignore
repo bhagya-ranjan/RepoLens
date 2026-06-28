@@ -21,3 +21,7 @@ build/
 
 # IDE
 .vscode/
+
+"package-lock.json",
+"pnpm-lock.yaml",
+"yarn.lock"

@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from app.api.clone import router as clone_router
+from app.api.chat import router as chat_router
+from app.api.file import router as file_router
+
 
 app = FastAPI(
     title="RepoLens AI API",
@@ -36,3 +38,7 @@ def health():
 
 # Register Clone API
 app.include_router(clone_router)
+app.include_router(chat_router)
+app.include_router(file_router)
+#activate env = venv\Scripts\activate
+#run backend = uvicorn main:app --reload-dir app
