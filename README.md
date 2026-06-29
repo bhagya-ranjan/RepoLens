@@ -32,16 +32,6 @@ Understand any GitHub repository in seconds by chatting with its code.
 
 ---
 
-# 📸 Preview
-
-> Add screenshots here
-
-| Landing | Chat |
-|---------|------|
-| ![](screenshots/landing.png) | ![](screenshots/chat.png) |
-
----
-
 # 🏗 Architecture
 
 ```text
