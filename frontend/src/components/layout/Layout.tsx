@@ -11,7 +11,7 @@ export default function Layout({ children }: Props) {
 
       <Navbar />
 
-      <main className="mx-auto max-w-7xl px-6 py-8">
+      <main className="mx-auto  px-6 py-8">
         {children}
       </main>
 

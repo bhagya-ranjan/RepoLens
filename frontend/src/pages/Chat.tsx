@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import ChatSidebar from "../components/chat/ChatSidebar";
 import { askQuestion } from "../services/chat";
 import MessageBubble from "../components/chat/MessageBubble";
@@ -42,6 +42,12 @@ export default function Chat() {
         language:"",
         code:"",
     });
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => {
+      messagesEndRef.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, [messages, loading]);
     const sendMessage = async () => {
   if (!question.trim() || loading) return;
 
@@ -96,17 +102,27 @@ export default function Chat() {
 
           <div className="flex flex-col gap-6">
 
-        {messages.map((message, index) => (
-        <MessageBubble
-    key={index}
-    role={message.role}
-    content={message.content}
-    sources={message.sources}
-    onSourceClick={openSource}
-/>
-        ))}
+            {messages.map((message, index) => (
+              <MessageBubble
+                key={index}
+                role={message.role}
+                content={message.content}
+                sources={message.sources}
+                onSourceClick={openSource}
+              />
+            ))}
 
-        </div>
+            {loading && (
+              <div className="flex items-center gap-2 text-gray-400">
+                <div className="h-2 w-2 animate-bounce rounded-full bg-violet-400" />
+                <div className="h-2 w-2 animate-bounce rounded-full bg-violet-400 [animation-delay:150ms]" />
+                <div className="h-2 w-2 animate-bounce rounded-full bg-violet-400 [animation-delay:300ms]" />
+              </div>
+            )}
+
+            <div ref={messagesEndRef} />
+
+          </div>
 
         </div>
 

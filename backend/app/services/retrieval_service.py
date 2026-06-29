@@ -17,6 +17,12 @@ def retrieve(query: str, n_results: int = 10):
         n_results=n_results
     )
 
+    print("=" * 60)
+    print(results["documents"][0])
+    print("=" * 60)
+
+    return results
+
     filtered_documents = []
     filtered_metadatas = []
     filtered_distances = []

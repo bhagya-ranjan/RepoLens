@@ -4,12 +4,18 @@ from app.services.scanner_service import scan_repository
 from app.services.document_service import build_document
 from app.services.chunk_service import chunk_documents
 from app.services.vector_store_service import add_chunks
-
+from app.core.chroma import collection
 
 def index_repository(repository_path: str):
     """
     Complete indexing pipeline.
     """
+
+    # Clear previous repository
+    ids = collection.get()["ids"]
+
+    if ids:
+        collection.delete(ids=ids)
 
     repository_name = os.path.basename(repository_path)
 

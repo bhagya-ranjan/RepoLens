@@ -16,7 +16,9 @@ export default function Landing() {
 
       navigate("/loading");
 
-      await indexGithubRepository(repoUrl);
+      const res = await indexGithubRepository(repoUrl);
+
+      localStorage.setItem("repositoryName", res.repository);
 
       navigate("/chat");
     } catch (error) {

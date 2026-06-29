@@ -6,6 +6,10 @@ import {
 } from "lucide-react";
 
 export default function ChatSidebar() {
+
+  const repository =
+    localStorage.getItem("repositoryName") || "No Repository";
+
   return (
     <aside className="flex h-full w-72 flex-col border-r border-white/10 bg-black/30 backdrop-blur-xl">
 
@@ -57,7 +61,7 @@ export default function ChatSidebar() {
           </div>
 
           <p className="text-sm text-gray-400">
-            Spotify Clone
+            {repository}
           </p>
 
         </div>
